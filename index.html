@@ -14,8 +14,16 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2>Clases de Alemán</h2>
-                <span>Carlos Román</span>
+                <!-- Desktop Banner -->
+                <img src="assets/images/logo.jpeg" alt="Clases de Alemán - Carlos Román" class="nav-banner banner-desktop">
+                <!-- Mobile Banner -->
+                <img src="assets/images/logo.jpeg" alt="Clases de Alemán - Carlos Román" class="nav-banner banner-mobile">
+
+                <!-- Fallback text (hidden by default, shown if images don't load) -->
+                <div class="text-logo-fallback" style="display: none;">
+                    <h2>Clases de Alemán</h2>
+                    <span>Carlos Román</span>
+                </div>
             </div>
             <ul class="nav-menu">
                 <li><a href="#inicio">Inicio</a></li>
@@ -35,46 +43,59 @@
     <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="hero-container">
-            <div class="hero-content">
+            <div class="hero-header">
                 <h1>Aprende Alemán con un <span class="highlight">Experto Certificado</span></h1>
-                <p class="hero-subtitle">Examinador oficial del Instituto Goethe con más de una década de experiencia enseñando alemán</p>
-                <div class="hero-features">
-                    <div class="feature">
-                        <i class="fas fa-certificate"></i>
-                        <span>Examinador Goethe</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-laptop"></i>
-                        <span>Clases Online</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Presencial en Madrid</span>
-                    </div>
-                </div>
-                <div class="hero-cta">
-                    <a href="#contacto" class="btn-primary">Reservar Clase de Prueba</a>
-                    <a href="#sobre-mi" class="btn-secondary">Conocer Más</a>
-                </div>
+                <p class="hero-subtitle">Examinador oficial del Instituto Goethe con más de cinco años de experiencia enseñando alemán</p>
             </div>
-            <div class="hero-image">
+
+            <div class="hero-main">
+                <div class="hero-info">
+                    <h2>¿Por qué elegir mis clases?</h2>
+                    <ul class="info-list">
+                        <li>
+                            <i class="fas fa-award"></i>
+                            <span>Examinador oficial certificado Goethe Institut</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Licenciado en Traducción e Interpretación</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-school"></i>
+                            <span>Profesor en colegio internacional</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-laptop"></i>
+                            <span>Clases online y presenciales en Madrid</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Horarios flexibles adaptados a ti</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-certificate"></i>
+                            <span>Preparación especializada para exámenes A1-B2</span>
+                        </li>
+                    </ul>
+                </div>
+
                 <div class="professor-card">
-                    <div class="card-content">
-                        <h3>Carlos Román</h3>
-                        <p>Profesor de Alemán</p>
-                        <div class="credentials">
-                            <span class="badge">Goethe Institut</span>
-                            <span class="badge">Colegio Internacional</span>
-                            <span class="badge">Traductor Oficial</span>
-                        </div>
+                    <h3>Carlos Román</h3>
+                    <p>Profesor de Alemán Certificado</p>
+                    <div class="credentials">
+                        <span class="badge">Goethe Institut</span>
+                        <span class="badge">Colegio Internacional</span>
+                        <span class="badge">Traductor Oficial</span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="hero-wave">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
-            </svg>
+
+            <div class="hero-cta">
+                <a href="#contacto" class="btn-primary">
+                    <i class="fas fa-calendar-check"></i>
+                    Reservar Clase de Prueba Gratuita
+                </a>
+            </div>
         </div>
     </section>
 
@@ -87,15 +108,7 @@
             </div>
             <div class="about-content">
                 <div class="about-image">
-                    <!-- Replace this div with your actual photo -->
-                    <div class="photo-placeholder">
-                        Tu foto aquí<br>
-                        (280x280px)
-                    </div>
-                    <!--
-                    Uncomment and use this when you have your photo:
-                    <img src="path/to/your/photo.jpg" alt="Carlos Román - Profesor de Alemán" class="profile-photo">
-                    -->
+                    <img src="assets/images/profile.jpeg" alt="Carlos Román - Profesor de Alemán" class="profile-photo">
                 </div>
                 <div class="about-text">
                     <h3>Carlos Román - Tu Profesor de Alemán</h3>
@@ -326,9 +339,14 @@
                 </div>
 
                 <div class="contact-form-container">
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xbljkjlr" method="POST">
                         <h3>Solicita tu Clase de Prueba</h3>
                         <p class="form-subtitle">¡La primera clase es gratuita para conocernos!</p>
+
+                        <!-- Hidden field for email recipient -->
+                        <input type="hidden" name="_to" value="carlosromanfconde@hotmail.com">
+                        <input type="hidden" name="_subject" value="Nueva consulta - Clases de Alemán">
+                        <input type="hidden" name="_next" value="thank-you.html">
 
                         <div class="form-group">
                             <input type="text" id="nombre" name="nombre" required>
@@ -336,7 +354,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="_replyto" required>
                             <label for="email">Email</label>
                         </div>
 
@@ -361,7 +379,7 @@
                             <select id="modalidad" name="modalidad" required>
                                 <option value="" disabled selected hidden></option>
                                 <option value="online">Clases Online</option>
-                                <option value="presencial">Clases Presenciales (El Carmen)</option>
+                                <option value="presencial">Clases Presenciales (Madrid)</option>
                                 <option value="ambas">Me interesan ambas</option>
                             </select>
                             <label for="modalidad">Modalidad preferida</label>

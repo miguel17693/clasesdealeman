@@ -1,5 +1,98 @@
 // German Classes Website JavaScript
 document.addEventListener("DOMContentLoaded", function () {
+  // Banner loading and error handling
+  const bannerDesktop = document.querySelector(".banner-desktop");
+  const bannerMobile = document.querySelector(".banner-mobile");
+  const textFallback = document.querySelector(".text-logo-fallback");
+
+  function handleBannerError() {
+    // Show text fallback if banners fail to load
+    if (textFallback) {
+      textFallback.style.display = "block";
+      // Re-enable text logo styles
+      const style = document.createElement("style");
+      style.textContent = `
+        .nav-logo h2,
+        .nav-logo span {
+          display: block !important;
+        }
+        .nav-logo h2 {
+          color: var(--primary-color);
+          font-size: 2.8rem;
+          font-weight: 900;
+          margin-bottom: 0.25rem;
+          letter-spacing: -0.06em;
+          font-family: "Orbitron", "Exo 2", "Rajdhani", "Inter", system-ui, sans-serif;
+          text-shadow: 2px 2px 4px rgba(43, 115, 157, 0.1);
+          text-transform: uppercase;
+        }
+        .nav-logo span {
+          color: var(--text-muted);
+          font-size: 0.875rem;
+          font-weight: 500;
+          letter-spacing: 0.025em;
+          text-transform: uppercase;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }
+
+  // Create placeholder banner if images don't exist
+  function createBannerPlaceholder() {
+    const placeholder = document.createElement("div");
+    placeholder.className = "banner-placeholder";
+    placeholder.innerHTML = `
+      <div style="
+        background: var(--primary-color);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        text-align: center;
+        max-width: 250px;
+      ">
+        TU BANNER AQUÍ
+      </div>
+    `;
+    return placeholder;
+  }
+
+  // Handle banner loading
+  if (bannerDesktop) {
+    console.log("Desktop banner found:", bannerDesktop.src);
+    bannerDesktop.onload = function () {
+      console.log("Desktop banner loaded successfully");
+      this.style.opacity = "1";
+      this.style.visibility = "visible";
+    };
+    bannerDesktop.onerror = function () {
+      console.log("Desktop banner failed to load:", this.src);
+      this.style.display = "none";
+      if (!document.querySelector(".banner-placeholder")) {
+        const placeholder = createBannerPlaceholder();
+        this.parentNode.appendChild(placeholder);
+      }
+    };
+  }
+
+  if (bannerMobile) {
+    console.log("Mobile banner found:", bannerMobile.src);
+    bannerMobile.onload = function () {
+      console.log("Mobile banner loaded successfully");
+      this.style.opacity = "1";
+      this.style.visibility = "visible";
+    };
+    bannerMobile.onerror = function () {
+      console.log("Mobile banner failed to load:", this.src);
+      this.style.display = "none";
+      if (!document.querySelector(".banner-placeholder")) {
+        const placeholder = createBannerPlaceholder();
+        this.parentNode.appendChild(placeholder);
+      }
+    };
+  }
   // Navigation functionality
   const navbar = document.querySelector(".navbar");
   const hamburger = document.querySelector(".hamburger");
@@ -99,8 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Form submission
-    contactForm.addEventListener("submit", function (e) {
+    // Form submission with Formspree
+    contactForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const submitBtn = contactForm.querySelector(".submit-btn");
@@ -111,33 +204,46 @@ document.addEventListener("DOMContentLoaded", function () {
         '<i class="fas fa-spinner fa-spin"></i> Enviando...';
       submitBtn.disabled = true;
 
-      // Collect form data
-      const formData = new FormData(contactForm);
-      const data = {};
+      try {
+        // Submit to Formspree
+        const response = await fetch(contactForm.action, {
+          method: "POST",
+          body: new FormData(contactForm),
+          headers: {
+            Accept: "application/json",
+          },
+        });
 
-      for (let [key, value] of formData.entries()) {
-        data[key] = value;
-      }
+        if (response.ok) {
+          // Show success message
+          showMessage(
+            "¡Gracias por tu interés! Te contactaré muy pronto para programar tu clase de prueba gratuita.",
+            "success",
+          );
 
-      // Simulate form submission (replace with actual form handling)
-      setTimeout(() => {
-        // Show success message
+          // Reset form
+          contactForm.reset();
+          formGroups.forEach((group) => {
+            group.classList.remove("focused");
+            const select = group.querySelector("select");
+            if (select) {
+              select.classList.remove("has-value");
+            }
+          });
+        } else {
+          throw new Error("Error en el envío");
+        }
+      } catch (error) {
+        console.error("Error:", error);
         showMessage(
-          "¡Gracias por tu interés! Te contactaré muy pronto para programar tu clase de prueba gratuita.",
-          "success",
+          "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo o contáctame directamente.",
+          "error",
         );
-
-        // Reset form
-        contactForm.reset();
-        formGroups.forEach((group) => group.classList.remove("focused"));
-
+      } finally {
         // Reset button
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-
-        // You can replace this with actual form submission logic
-        console.log("Form data:", data);
-      }, 2000);
+      }
     });
   }
 
@@ -152,17 +258,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create message element
     const messageDiv = document.createElement("div");
     messageDiv.className = `form-message ${type}`;
+    const iconClass =
+      type === "success"
+        ? "fa-check-circle"
+        : type === "error"
+          ? "fa-exclamation-circle"
+          : "fa-info-circle";
     messageDiv.innerHTML = `
-            <i class="fas ${type === "success" ? "fa-check-circle" : "fa-info-circle"}"></i>
+            <i class="fas ${iconClass}"></i>
             <span>${message}</span>
         `;
 
     // Add styles
+    const bgColor =
+      type === "success" ? "#4caf50" : type === "error" ? "#f44336" : "#2196f3";
     messageDiv.style.cssText = `
             position: fixed;
             top: 100px;
             right: 20px;
-            background: ${type === "success" ? "#4caf50" : "#2196f3"};
+            background: ${bgColor};
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 12px;
@@ -348,15 +462,17 @@ document.addEventListener("DOMContentLoaded", function () {
     statsObserver.observe(statsSection);
   }
 
-  // Add loading animation for images (if any are added later)
-  document.querySelectorAll("img").forEach((img) => {
-    img.addEventListener("load", function () {
-      this.style.opacity = "1";
-    });
+  // Add loading animation for images (excluding banners and profile photos)
+  document
+    .querySelectorAll("img:not(.nav-banner):not(.profile-photo)")
+    .forEach((img) => {
+      img.addEventListener("load", function () {
+        this.style.opacity = "1";
+      });
 
-    img.style.opacity = "0";
-    img.style.transition = "opacity 0.3s ease";
-  });
+      img.style.opacity = "0";
+      img.style.transition = "opacity 0.3s ease";
+    });
 
   // Keyboard navigation support
   document.addEventListener("keydown", function (e) {
@@ -386,7 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   document.head.appendChild(focusStyle);
 
-  // Lazy loading for better performance (if images are added)
+  // Lazy loading for better performance (if images are added, excluding banners)
   if ("IntersectionObserver" in window) {
     const lazyImageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
@@ -399,9 +515,11 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    document.querySelectorAll("img[data-src]").forEach((lazyImage) => {
-      lazyImageObserver.observe(lazyImage);
-    });
+    document
+      .querySelectorAll("img[data-src]:not(.nav-banner)")
+      .forEach((lazyImage) => {
+        lazyImageObserver.observe(lazyImage);
+      });
   }
 
   // Error handling for form validation

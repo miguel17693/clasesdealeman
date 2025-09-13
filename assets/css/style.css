@@ -6,14 +6,14 @@
 }
 
 :root {
-    --primary-color: #2b739d;
+    --primary-color: #020a0f;
     --primary-light: #4a8bb8;
     --primary-dark: #1e5470;
     --secondary-color: #d0f1ea;
     --secondary-light: #e6f7f2;
     --secondary-dark: #a8e6d3;
     --accent-color: #1a4257;
-    --text-dark: #1e5470;
+    --text-dark: #c69c39;
     --text-light: #6b7280;
     --text-white: #ffffff;
     --text-muted: #9ca3af;
@@ -89,7 +89,7 @@ body {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     z-index: 1000;
-    padding: 1.2rem 0;
+    padding: 1.5rem 0 1rem 0;
     transition: var(--transition);
     box-shadow: var(--shadow-light);
     border-bottom: 1px solid rgba(100, 116, 139, 0.1);
@@ -104,37 +104,28 @@ body {
     align-items: center;
 }
 
-.nav-logo h2 {
-    color: var(--primary-color);
-    font-size: 3.2rem;
-    font-weight: 900;
-    margin-bottom: 0.25rem;
-    letter-spacing: -0.06em;
-    font-family:
-        "Orbitron", "Exo 2", "Rajdhani", "Inter", system-ui, sans-serif;
-    position: relative;
-    text-shadow: 2px 2px 4px rgba(43, 115, 157, 0.1);
-    text-transform: uppercase;
+/* Banner Structure */
+.nav-banner {
+    height: 70px;
+    width: auto;
+    max-width: 400px;
+    object-fit: cover;
+    object-position: center;
 }
 
-.nav-logo h2::after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--primary-color);
-    border-radius: 1px;
-    opacity: 0.6;
+/* Banner responsive display */
+.banner-desktop {
+    display: block;
 }
 
+.banner-mobile {
+    display: none;
+}
+
+/* Hide old text logo by default */
+.nav-logo h2,
 .nav-logo span {
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.025em;
-    text-transform: uppercase;
+    display: none;
 }
 
 .nav-menu {
@@ -186,193 +177,187 @@ body {
 
 /* Hero Section */
 .hero {
-    background: var(--background-light);
+    background: var(--background-white);
     color: var(--text-dark);
-    padding: 100px 0 80px;
-    position: relative;
+    padding: 140px 0 80px;
+    border-bottom: 3px solid var(--secondary-color);
 }
 
 .hero-container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.hero-header {
     text-align: center;
+    margin-bottom: 3rem;
 }
 
 .hero-content h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    font-size: 2.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
 }
 
 .highlight {
     color: var(--primary-color);
-    position: relative;
-}
-
-.highlight::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--primary-color);
-    opacity: 0.8;
-    border-radius: 1px;
+    font-weight: 700;
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: 1.1rem;
     color: var(--text-light);
     font-weight: 400;
-    line-height: 1.6;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto 2rem;
 }
 
-.hero-features {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2.5rem;
-    flex-wrap: wrap;
+.hero-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 3rem;
 }
 
-.feature {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    background: var(--background-white);
-    padding: 1rem 1.5rem;
-    border-radius: var(--border-radius-sm);
-    border: 2px solid var(--secondary-color);
-    box-shadow: var(--shadow-light);
-}
-
-.feature i {
-    color: var(--primary-color);
-    font-size: 1.2rem;
-}
-
-.feature span {
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-.hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.btn-primary,
-.btn-secondary {
-    padding: 1rem 2rem;
+.hero-info {
+    background: var(--background-light);
+    padding: 2.5rem;
     border-radius: var(--border-radius);
-    text-decoration: none;
+    border-left: 4px solid var(--primary-color);
+}
+
+.hero-info h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
     font-weight: 600;
-    transition: var(--transition);
-    display: inline-flex;
+}
+
+.info-list {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.info-list li {
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    border: 2px solid transparent;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(43, 115, 157, 0.1);
 }
 
-.btn-primary {
-    background: var(--primary-color);
-    color: var(--text-white);
-    font-weight: 600;
-    box-shadow: var(--shadow-medium);
+.info-list li:last-child {
+    border-bottom: none;
 }
 
-.btn-primary:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-heavy);
+.info-list i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
 }
 
-.btn-secondary {
-    background: transparent;
-    color: var(--text-white);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.btn-secondary:hover {
-    background: rgba(208, 241, 234, 0.1);
-    border-color: var(--secondary-color);
-    transform: translateY(-2px);
+.info-list span {
+    color: var(--text-dark);
+    font-weight: 500;
 }
 
 .professor-card {
     background: var(--background-white);
+    border: 2px solid var(--secondary-color);
     border-radius: var(--border-radius);
     padding: 2rem;
-    border: 2px solid var(--primary-color);
     text-align: center;
-    box-shadow: var(--shadow-medium);
-    max-width: 400px;
-    margin: 0 auto 2rem;
+    box-shadow: var(--shadow-light);
 }
 
 .professor-card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
+    font-size: 1.4rem;
     color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .professor-card p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-light);
     margin-bottom: 1.5rem;
-    font-weight: 400;
 }
 
 .credentials {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.8rem;
 }
 
 .badge {
-    background: var(--secondary-color);
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: var(--text-white);
+    padding: 0.6rem 1.2rem;
     border-radius: var(--border-radius-sm);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.hero-cta {
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--text-white);
+    padding: 1rem 2.5rem;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
     font-weight: 600;
-    border: 1px solid var(--primary-color);
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition);
+    border: none;
 }
 
-.hero-wave {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-heavy);
 }
 
-.hero-wave svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 60px;
+.btn-primary i {
+    font-size: 1rem;
 }
 
-.hero-wave path {
-    fill: var(--background-white);
+/* Responsive adjustments for hero */
+@media (max-width: 768px) {
+    .hero-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-info {
+        order: 2;
+    }
+
+    .professor-card {
+        order: 1;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
 }
 
 /* About Section */
 .about {
-    padding: 8rem 0;
+    padding: 5rem 0;
     background: var(--background-light);
 }
 
@@ -510,7 +495,7 @@ body {
 
 /* Method Section */
 .method {
-    padding: 8rem 0;
+    padding: 5rem 0;
     background: var(--background-light);
 }
 
@@ -583,7 +568,7 @@ body {
 
 /* Services Section */
 .services {
-    padding: 8rem 0;
+    padding: 5rem 0;
     background: var(--background-white);
 }
 
@@ -786,7 +771,7 @@ body {
 
 /* Contact Section */
 .contact {
-    padding: 6rem 0;
+    padding: 4rem 0;
     background: var(--background-white);
 }
 
@@ -996,7 +981,7 @@ body {
 
 /* Footer */
 .footer {
-    background: var(--text-dark);
+    background: var(--gradient-primary);
     color: var(--text-white);
     padding: 3rem 0 1rem;
 }
@@ -1015,7 +1000,7 @@ body {
 }
 
 .footer-main p {
-    color: var(--text-light);
+    color: white;
     margin-bottom: 1.5rem;
 }
 
@@ -1053,7 +1038,7 @@ body {
 }
 
 .footer-links a {
-    color: var(--text-light);
+    color: white;
     text-decoration: none;
     transition: var(--transition);
 }
@@ -1071,7 +1056,7 @@ body {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-light);
+    color: white;
 }
 
 .footer-domain {
@@ -1126,6 +1111,60 @@ body {
 
     .hamburger {
         display: flex;
+    }
+
+    .navbar {
+        padding: 1rem 0 0.8rem 0;
+    }
+
+    /* Banner mobile display */
+    .banner-desktop {
+        display: none;
+    }
+
+    .banner-mobile {
+        display: block;
+    }
+
+    .nav-banner {
+        height: 50px;
+        max-width: 300px;
+    }
+
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .about {
+        padding: 4rem 0;
+    }
+
+    .method {
+        padding: 4rem 0;
+    }
+
+    .services {
+        padding: 4rem 0;
+    }
+
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .about {
+        padding: 3rem 0;
+    }
+
+    .method {
+        padding: 3rem 0;
+    }
+
+    .services {
+        padding: 3rem 0;
+    }
+
+    .contact {
+        padding: 3rem 0;
     }
 
     .hero-content h1 {
@@ -1190,6 +1229,16 @@ body {
 
     .section-header h2 {
         font-size: 2rem;
+    }
+
+    .banner-mobile {
+        max-height: 35px;
+        max-width: 200px;
+    }
+
+    .nav-banner {
+        height: 40px;
+        max-width: 250px;
     }
 
     .hero-content h1 {
