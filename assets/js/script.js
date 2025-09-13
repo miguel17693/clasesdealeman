@@ -174,75 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Contact form functionality
-  const contactForm = document.getElementById("contactForm");
-
-  if (contactForm) {
-    // Form field animations
-    const formGroups = document.querySelectorAll(".form-group");
-
-    formGroups.forEach((group) => {
-      const input = group.querySelector("input, select, textarea");
-      if (input) {
-        // Add placeholder for input animations
-        if (input.tagName.toLowerCase() !== "select") {
-          input.setAttribute("placeholder", " ");
-        }
-
-        // Handle focus and blur events for better UX
-        input.addEventListener("focus", function () {
-          group.classList.add("focused");
-        });
-
-        input.addEventListener("blur", function () {
-          if (
-            !input.value ||
-            (input.tagName === "SELECT" && input.value === "")
-          ) {
-            group.classList.remove("focused");
-          }
-        });
-
-        // Handle select change events
-        if (input.tagName === "SELECT") {
-          input.addEventListener("change", function () {
-            if (this.value !== "" && this.value !== null) {
-              group.classList.add("focused");
-              this.classList.add("has-value");
-            } else {
-              group.classList.remove("focused");
-              this.classList.remove("has-value");
-            }
-          });
-        }
-
-        // Check if field has value on load
-        if (input.value && input.value !== "" && input.value !== null) {
-          group.classList.add("focused");
-          if (input.tagName === "SELECT") {
-            input.classList.add("has-value");
-          }
-        }
-      }
-    });
-
-    // Form validation only - let FormSubmit.io handle submission naturally
-    contactForm.addEventListener("submit", function (e) {
-      // Only validate - don't prevent submission if valid
-      if (!validateForm(this)) {
-        e.preventDefault();
-        showMessage(
-          "Por favor, completa todos los campos requeridos.",
-          "error",
-        );
-        return;
-      }
-
-      // Form is valid - let it submit naturally to FormSubmit.io
-      // Don't prevent default, don't show loading messages
-      // FormSubmit.io will handle everything from here
-    });
-  }
+  // Contact form functionality removed - now using direct email contact
 
   // Message display function
   function showMessage(message, type = "info") {
@@ -520,41 +452,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Error handling for form validation
-  function validateForm(form) {
-    const requiredFields = form.querySelectorAll("[required]");
-    let isValid = true;
-
-    requiredFields.forEach((field) => {
-      if (!field.value.trim()) {
-        field.style.borderColor = "#f44336";
-        isValid = false;
-
-        // Reset border color on input
-        field.addEventListener(
-          "input",
-          function () {
-            this.style.borderColor = "#e0e0e0";
-          },
-          { once: true },
-        );
-      }
-    });
-
-    // Validate email format
-    const emailField = form.querySelector('input[type="email"]');
-    if (emailField && emailField.value) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailField.value)) {
-        emailField.style.borderColor = "#f44336";
-        showMessage("Por favor, introduce un email válido.", "error");
-        isValid = false;
-      }
-    }
-
-    return isValid;
-  }
-
-  // Form validation is now handled in the main submit event listener above
+  // Form validation function removed - no longer needed without contact form
 
   console.log("🇩🇪 German Classes Website loaded successfully!");
 });

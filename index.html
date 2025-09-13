@@ -289,33 +289,407 @@
                 <h2>Contacto</h2>
                 <p>¿Listo para empezar tu aventura con el alemán? ¡Hablemos!</p>
             </div>
+
             <div class="contact-content">
-                <div class="contact-info">
-                    <h3>¿Por qué elegir mis clases?</h3>
-                    <div class="contact-reasons">
-                        <div class="reason">
-                            <i class="fas fa-medal"></i>
-                            <div>
-                                <h5>Experiencia Comprobada</h5>
-                                <p>Más de 10 años formando estudiantes exitosos</p>
+                <div class="contact-email-container">
+                    <div class="contact-email-card">
+                        <h3>¡Contacta conmigo directamente!</h3>
+                        <p class="email-subtitle">Escríbeme para solicitar tu clase de prueba gratuita</p>
+
+                        <div class="email-display">
+                            <div class="email-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="email-content">
+                                <div class="email-address" id="emailAddress">
+                                    carlosromanfconde@hotmail.com
+                                </div>
+                                <div class="email-buttons">
+                                    <button class="copy-btn" id="copyEmailBtn" onclick="copyEmail()">
+                                        <i class="fas fa-copy"></i>
+                                        <span class="copy-text">Copiar email</span>
+                                    </button>
+                                    <button class="send-btn" onclick="sendEmail()">
+                                        <i class="fas fa-paper-plane"></i>
+                                        <span>Enviar email</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="reason">
-                            <i class="fas fa-handshake"></i>
-                            <div>
-                                <h5>Garantía de Calidad</h5>
-                                <p>Examinador oficial con conocimiento insider</p>
-                            </div>
+
+                        <div class="contact-suggestions">
+                            <h4><i class="fas fa-lightbulb"></i> En tu mensaje, cuéntame:</h4>
+                            <ul>
+                                <li><i class="fas fa-user"></i> Tu nombre</li>
+                                <li><i class="fas fa-chart-bar"></i> Tu nivel actual de alemán</li>
+                                <li><i class="fas fa-laptop"></i> Si prefieres clases online o presenciales</li>
+                                <li><i class="fas fa-target"></i> Tus objetivos con el idioma</li>
+                            </ul>
                         </div>
-                        <div class="reason">
-                            <i class="fas fa-heart"></i>
-                            <div>
-                                <h5>Pasión por Enseñar</h5>
-                                <p>Cada estudiante es importante para mí</p>
-                            </div>
+
+                        <div class="contact-note">
+                            <i class="fas fa-clock"></i>
+                            Te responderé en menos de 24 horas para programar tu clase gratuita
                         </div>
                     </div>
+                </div>
 
+                <style>
+                .contact-content {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 3rem;
+                    align-items: start;
+                }
+
+                .contact-email-container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                }
+
+                .contact-info {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 2rem;
+                }
+
+                .contact-details {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 1.5rem;
+                    margin-bottom: 2rem;
+                }
+
+                .contact-item {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1rem;
+                }
+
+                .contact-item i {
+                    color: var(--secondary-color);
+                    font-size: 1.25rem;
+                    margin-top: 0.25rem;
+                    width: 24px;
+                    flex-shrink: 0;
+                }
+
+                .contact-item h5 {
+                    color: var(--primary-color);
+                    margin-bottom: 0.5rem;
+                    font-weight: 600;
+                }
+
+                .contact-item p {
+                    color: #666;
+                    line-height: 1.5;
+                    margin: 0;
+                }
+
+                .contact-reasons {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 1.5rem;
+                }
+
+                .reason {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1rem;
+                    padding: 1rem;
+                    background: #f8f9fa;
+                    border-radius: 10px;
+                    border-left: 4px solid var(--secondary-color);
+                }
+
+                .reason i {
+                    color: var(--secondary-color);
+                    font-size: 1.25rem;
+                    margin-top: 0.25rem;
+                    width: 24px;
+                    flex-shrink: 0;
+                }
+
+                .reason h5 {
+                    color: var(--primary-color);
+                    margin-bottom: 0.5rem;
+                    font-weight: 600;
+                }
+
+                .reason p {
+                    color: #666;
+                    line-height: 1.5;
+                    margin: 0;
+                }
+
+                @media (max-width: 768px) {
+                    .contact-details, .contact-reasons {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                .contact-email-card {
+                    background: white;
+                    padding: 3rem 2rem;
+                    border-radius: 20px;
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+                    text-align: center;
+                    border: 1px solid #f0f0f0;
+                }
+
+                .contact-email-card h3 {
+                    color: var(--primary-color);
+                    font-size: 2rem;
+                    font-weight: 700;
+                    margin-bottom: 1rem;
+                }
+
+                .email-subtitle {
+                    color: #666;
+                    font-size: 1.1rem;
+                    margin-bottom: 2rem;
+                }
+
+                .email-display {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #f8f9fa;
+                    padding: 1.5rem;
+                    border-radius: 15px;
+                    margin-bottom: 2rem;
+                    border: 2px solid #e9ecef;
+                    transition: all 0.3s ease;
+                }
+
+                .email-display:hover {
+                    border-color: var(--secondary-color);
+                    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);
+                }
+
+                .email-icon {
+                    color: var(--secondary-color);
+                    font-size: 2rem;
+                    margin-right: 1rem;
+                }
+
+                .email-content {
+                    flex: 1;
+                    text-align: left;
+                }
+
+                .email-buttons {
+                    display: flex;
+                    gap: 0.75rem;
+                    flex-wrap: wrap;
+                }
+
+                .email-address {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                    margin-bottom: 0.75rem;
+                    word-break: break-all;
+                }
+
+                .copy-btn {
+                    background: var(--secondary-color);
+                    color: var(--primary-color);
+                    border: none;
+                    padding: 0.5rem 1rem;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    transition: all 0.3s ease;
+                    font-size: 0.9rem;
+                }
+
+                .copy-btn:hover {
+                    background: #e6b800;
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+                }
+
+                .copy-btn.copied {
+                    background: #28a745;
+                    color: white;
+                }
+
+                .send-btn {
+                    background: var(--primary-color);
+                    color: white;
+                    border: none;
+                    padding: 0.5rem 1rem;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    transition: all 0.3s ease;
+                    font-size: 0.9rem;
+                }
+
+                .send-btn:hover {
+                    background: #1a365d;
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(26, 54, 93, 0.3);
+                }
+
+                .contact-suggestions {
+                    background: #fff8e1;
+                    padding: 1.5rem;
+                    border-radius: 10px;
+                    margin-bottom: 1.5rem;
+                    border-left: 4px solid var(--secondary-color);
+                    text-align: left;
+                }
+
+                .contact-suggestions h4 {
+                    color: var(--primary-color);
+                    margin-bottom: 1rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .contact-suggestions ul {
+                    list-style: none;
+                    padding: 0;
+                }
+
+                .contact-suggestions li {
+                    padding: 0.5rem 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    color: #555;
+                }
+
+                .contact-suggestions li i {
+                    color: var(--secondary-color);
+                    width: 16px;
+                }
+
+                .contact-note {
+                    background: #e8f5e8;
+                    color: #2d5a2d;
+                    padding: 1rem;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    font-weight: 500;
+                }
+
+                .contact-note i {
+                    color: #28a745;
+                }
+
+                @media (max-width: 768px) {
+                    .contact-email-card {
+                        padding: 2rem 1.5rem;
+                    }
+
+                    .contact-email-card h3 {
+                        font-size: 1.5rem;
+                    }
+
+                    .email-display {
+                        flex-direction: column;
+                        text-align: center;
+                        gap: 1rem;
+                    }
+
+                    .email-content {
+                        text-align: center;
+                    }
+
+                    .email-address {
+                        font-size: 1.1rem;
+                    }
+
+                    .email-icon {
+                        margin-right: 0;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .email-buttons {
+                        justify-content: center;
+                    }
+
+                    .copy-btn, .send-btn {
+                        flex: 1;
+                        min-width: 120px;
+                    }
+                }
+                </style>
+
+                <script>
+                function copyEmail() {
+                    const emailAddress = document.getElementById('emailAddress').textContent;
+                    const copyBtn = document.getElementById('copyEmailBtn');
+                    const copyText = copyBtn.querySelector('.copy-text');
+
+                    navigator.clipboard.writeText(emailAddress).then(function() {
+                        // Success feedback
+                        copyBtn.classList.add('copied');
+                        copyText.textContent = '¡Copiado!';
+                        copyBtn.querySelector('i').className = 'fas fa-check';
+
+                        // Reset after 2 seconds
+                        setTimeout(function() {
+                            copyBtn.classList.remove('copied');
+                            copyText.textContent = 'Copiar email';
+                            copyBtn.querySelector('i').className = 'fas fa-copy';
+                        }, 2000);
+                    }).catch(function() {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = emailAddress;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+
+                        copyBtn.classList.add('copied');
+                        copyText.textContent = '¡Copiado!';
+                        copyBtn.querySelector('i').className = 'fas fa-check';
+
+                        setTimeout(function() {
+                            copyBtn.classList.remove('copied');
+                            copyText.textContent = 'Copiar email';
+                            copyBtn.querySelector('i').className = 'fas fa-copy';
+                        }, 2000);
+                    });
+                }
+
+                function sendEmail() {
+                    const email = 'carlosromanfconde@hotmail.com';
+                    const subject = 'Consulta sobre clases de alemán';
+                    const body = `Hola Carlos,
+
+Me interesa información sobre tus clases de alemán.
+
+Mi información:
+- Nombre: [Tu nombre]
+- Nivel actual: [Principiante/Básico/Intermedio/No estoy seguro]
+- Modalidad preferida: [Online/Presencial en Madrid/Ambas]
+- Objetivos: [Describe tus objetivos]
+
+¡Gracias!`;
+
+                    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.open(mailtoLink, '_blank');
+                }
+                </script>
+                </div>
+
+                <div class="contact-info">
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
@@ -342,67 +716,30 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="contact-form-container">
-                    <form class="contact-form" id="contactForm" action="https://formsubmit.io/send/carlosromanfconde@hotmail.com" method="POST">
-                        <h3>Solicita tu Clase de Prueba</h3>
-                        <p class="form-subtitle">¡La primera clase es gratuita para conocernos!</p>
-
-                        <!-- FormSubmit.io minimal configuration -->
-
-                        <div class="form-group">
-                            <input type="text" id="nombre" name="nombre" required>
-                            <label for="nombre">Tu nombre</label>
+                    <div class="contact-reasons">
+                        <div class="reason">
+                            <i class="fas fa-medal"></i>
+                            <div>
+                                <h5>Experiencia Comprobada</h5>
+                                <p>Más de 10 años formando estudiantes exitosos</p>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" required>
-                            <label for="email">Email</label>
+                        <div class="reason">
+                            <i class="fas fa-handshake"></i>
+                            <div>
+                                <h5>Garantía de Calidad</h5>
+                                <p>Examinador oficial con conocimiento insider</p>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <input type="tel" id="telefono" name="telefono">
-                            <label for="telefono">Teléfono (opcional)</label>
+                        <div class="reason">
+                            <i class="fas fa-heart"></i>
+                            <div>
+                                <h5>Pasión por Enseñar</h5>
+                                <p>Cada estudiante es importante para mí</p>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <select id="nivel" name="nivel" required>
-                                <option value="" disabled selected hidden></option>
-                                <option value="principiante">Principiante (A1)</option>
-                                <option value="basico">Básico (A2)</option>
-                                <option value="intermedio">Intermedio (B1)</option>
-                                <option value="intermedio-alto">Intermedio Alto (B2)</option>
-                                <option value="no-se">No estoy seguro/a</option>
-                            </select>
-                            <label for="nivel">Nivel actual</label>
-                        </div>
-
-                        <div class="form-group">
-                            <select id="modalidad" name="modalidad" required>
-                                <option value="" disabled selected hidden></option>
-                                <option value="online">Clases Online</option>
-                                <option value="presencial">Clases Presenciales (Madrid)</option>
-                                <option value="ambas">Me interesan ambas</option>
-                            </select>
-                            <label for="modalidad">Modalidad preferida</label>
-                        </div>
-
-                        <div class="form-group">
-                            <textarea id="mensaje" name="mensaje" rows="4"></textarea>
-                            <label for="mensaje">Cuéntame sobre tus objetivos con el alemán (opcional)</label>
-                        </div>
-
-                        <button type="submit" class="submit-btn">
-                            <span>Solicitar Clase de Prueba</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-
-                        <p class="form-note">
-                            <i class="fas fa-shield-alt"></i>
-                            Tu información está segura y no será compartida con terceros
-                        </p>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -447,29 +784,10 @@
         </div>
     </footer>
 
-    <!-- Success Message Section -->
-    <div id="gracias" class="success-section" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999;">
-        <div style="background: white; padding: 2rem; border-radius: 10px; text-align: center; max-width: 500px; margin: 1rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <div style="color: #4CAF50; font-size: 3rem; margin-bottom: 1rem;">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h2 style="color: #333; margin-bottom: 1rem;">¡Mensaje enviado con éxito!</h2>
-            <p style="color: #666; margin-bottom: 2rem;">
-                Gracias por tu interés en las clases de alemán. Te contactaré muy pronto para programar tu clase de prueba gratuita.
-            </p>
-            <button onclick="window.location.href='#inicio'" style="background: var(--primary-color); color: white; border: none; padding: 0.75rem 2rem; border-radius: 5px; cursor: pointer; font-size: 1rem;">
-                Volver al inicio
-            </button>
-        </div>
-    </div>
+
 
     <script src="assets/js/script.js"></script>
 
-    <script>
-        // Show success message if redirected from FormSubmit
-        if (window.location.hash === '#gracias') {
-            document.getElementById('gracias').style.display = 'block';
-        }
-    </script>
+
 </body>
 </html>
