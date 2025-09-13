@@ -109,20 +109,54 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Mobile menu toggle
   if (hamburger && navMenu) {
-    hamburger.addEventListener("click", function () {
+    console.log("Mobile menu elements found successfully");
+
+    // Force show elements for debugging
+    hamburger.style.display = "flex";
+
+    hamburger.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      console.log("Hamburger clicked!");
+      console.log("Menu classes before:", navMenu.className);
+
       hamburger.classList.toggle("active");
       navMenu.classList.toggle("active");
+
+      console.log("Menu classes after:", navMenu.className);
+      console.log(
+        "Menu computed styles:",
+        window.getComputedStyle(navMenu).left,
+      );
     });
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll(".nav-menu a").forEach((link) => {
-      link.addEventListener("click", function () {
+    // Close menu when clicking on links
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        console.log("Menu link clicked - closing menu");
         hamburger.classList.remove("active");
         navMenu.classList.remove("active");
       });
     });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        !hamburger.contains(e.target) &&
+        !navMenu.contains(e.target) &&
+        navMenu.classList.contains("active")
+      ) {
+        console.log("Clicked outside - closing menu");
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+      }
+    });
+  } else {
+    console.error("Mobile menu elements NOT found!");
+    console.log("Hamburger:", hamburger);
+    console.log("NavMenu:", navMenu);
   }
 
   // Smooth scrolling for navigation links
@@ -192,58 +226,21 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Form submission with Formspree
-    contactForm.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const submitBtn = contactForm.querySelector(".submit-btn");
-      const originalText = submitBtn.innerHTML;
-
-      // Show loading state
-      submitBtn.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-      submitBtn.disabled = true;
-
-      try {
-        // Submit to Formspree
-        const response = await fetch(contactForm.action, {
-          method: "POST",
-          body: new FormData(contactForm),
-          headers: {
-            Accept: "application/json",
-          },
-        });
-
-        if (response.ok) {
-          // Show success message
-          showMessage(
-            "¡Gracias por tu interés! Te contactaré muy pronto para programar tu clase de prueba gratuita.",
-            "success",
-          );
-
-          // Reset form
-          contactForm.reset();
-          formGroups.forEach((group) => {
-            group.classList.remove("focused");
-            const select = group.querySelector("select");
-            if (select) {
-              select.classList.remove("has-value");
-            }
-          });
-        } else {
-          throw new Error("Error en el envío");
-        }
-      } catch (error) {
-        console.error("Error:", error);
+    // Form validation only - let FormSubmit.io handle submission naturally
+    contactForm.addEventListener("submit", function (e) {
+      // Only validate - don't prevent submission if valid
+      if (!validateForm(this)) {
+        e.preventDefault();
         showMessage(
-          "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo o contáctame directamente.",
+          "Por favor, completa todos los campos requeridos.",
           "error",
         );
-      } finally {
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
+        return;
       }
+
+      // Form is valid - let it submit naturally to FormSubmit.io
+      // Don't prevent default, don't show loading messages
+      // FormSubmit.io will handle everything from here
     });
   }
 
@@ -557,19 +554,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return isValid;
   }
 
-  // Add form validation to contact form
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      if (!validateForm(this)) {
-        e.preventDefault();
-        showMessage(
-          "Por favor, completa todos los campos requeridos.",
-          "error",
-        );
-        return;
-      }
-    });
-  }
+  // Form validation is now handled in the main submit event listener above
 
   console.log("🇩🇪 German Classes Website loaded successfully!");
 });
