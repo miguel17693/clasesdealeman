@@ -763,7 +763,7 @@ body {
 }
 
 .service-card.featured::before {
-    content: "Más Popular";
+    content: "Más popular";
     position: absolute;
     top: -12px;
     left: 50%;
